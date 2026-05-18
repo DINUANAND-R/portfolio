@@ -1,0 +1,539 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ============================================================
+   CSS Custom Properties — Magical Dark Academia Palette
+   ============================================================ */
+:root {
+  --bg-color: #0B0F19;
+  --card-color: #151A24;
+  --primary-gold: #D4AF37;
+  --deep-gold: #A67C00;
+  --magic-green: #22C55E;
+  --emerald-glow: #10B981;
+  --accent-purple: #8B5CF6;
+  --parchment: #F5E6C8;
+  --text-color: #F9FAFB;
+  --muted-text: #A1A1AA;
+  --border-glow: rgba(212, 175, 55, 0.45);
+  --card-border: rgba(212, 175, 55, 0.18);
+  --green-glow: rgba(34, 197, 94, 0.35);
+  --purple-glow: rgba(139, 92, 246, 0.35);
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb {
+  background: var(--deep-gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary-gold); }
+
+/* ============================================================
+   Custom Cursor
+   ============================================================ */
+/* Magic Wand Cursor — main wand tip */
+.cursor-main {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  /* Offset so the wand tip aligns with the click point */
+  transform: translate(-4px, -28px);
+  font-size: 1.6rem;
+  line-height: 1;
+  filter:
+    drop-shadow(0 0 6px rgba(212, 175, 55, 0.9))
+    drop-shadow(0 0 14px rgba(212, 175, 55, 0.5))
+    drop-shadow(0 0 28px rgba(34, 197, 94, 0.3));
+  transition: filter 0.2s ease;
+  user-select: none;
+  /* Rotate wand 45° for classic wand feel */
+  rotate: 45deg;
+}
+
+/* Trailing sparkle ring behind the wand */
+.cursor-trail {
+  position: fixed;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.18s ease;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.2);
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+.font-cinzel { font-family: 'Cinzel', serif; }
+.font-crimson { font-family: 'Crimson Text', serif; }
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--primary-gold);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
+
+.section-subtitle {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  color: var(--muted-text);
+  text-align: center;
+  margin-bottom: 3.5rem;
+  font-style: italic;
+}
+
+/* ============================================================
+   Glow & Glassmorphism Utilities
+   ============================================================ */
+.glass {
+  background: rgba(21, 26, 36, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-border);
+}
+
+.glow-gold {
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4), 0 0 30px rgba(212, 175, 55, 0.15);
+}
+
+.glow-green {
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.4), 0 0 30px rgba(34, 197, 94, 0.15);
+}
+
+.glow-purple {
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4), 0 0 30px rgba(139, 92, 246, 0.15);
+}
+
+.text-gold { color: var(--primary-gold); }
+.text-green { color: var(--magic-green); }
+.text-emerald { color: var(--emerald-glow); }
+.text-purple { color: var(--accent-purple); }
+.text-parchment { color: var(--parchment); }
+.text-muted { color: var(--muted-text); }
+
+/* ============================================================
+   Magic Buttons
+   ============================================================ */
+.btn-magic {
+  position: relative;
+  padding: 0.75rem 2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  cursor: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--primary-gold);
+  color: var(--primary-gold);
+  background: transparent;
+}
+
+.btn-magic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-magic:hover::before { opacity: 1; }
+.btn-magic:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 0 50px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-magic-filled {
+  background: linear-gradient(135deg, var(--primary-gold), var(--deep-gold));
+  color: var(--bg-color);
+  border: none;
+  font-weight: 700;
+}
+
+.btn-magic-filled:hover {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.7), 0 0 60px rgba(212, 175, 55, 0.3);
+  filter: brightness(1.1);
+}
+
+.btn-magic-green {
+  border-color: var(--magic-green);
+  color: var(--magic-green);
+}
+.btn-magic-green:hover {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+/* ============================================================
+   Cards
+   ============================================================ */
+.magic-card {
+  background: var(--card-color);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.magic-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.magic-card:hover::before { opacity: 1; }
+
+.magic-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2), 0 8px 32px rgba(0,0,0,0.5);
+  transform: translateY(-4px);
+}
+
+/* ============================================================
+   Parchment Style
+   ============================================================ */
+.parchment-card {
+  background: linear-gradient(135deg, #1e1a10 0%, #1a1508 40%, #12100a 100%);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 6px;
+  position: relative;
+}
+
+.parchment-card::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(212, 175, 55, 0.08);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Section Layout
+   ============================================================ */
+.section-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+  margin: 0.5rem auto 0.5rem;
+}
+
+/* ============================================================
+   Animations (CSS)
+   ============================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(2deg); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 8px rgba(212,175,55,0.3); }
+  50% { box-shadow: 0 0 25px rgba(212,175,55,0.7), 0 0 50px rgba(212,175,55,0.3); }
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 8px rgba(34,197,94,0.3); }
+  50% { box-shadow: 0 0 25px rgba(34,197,94,0.7), 0 0 50px rgba(34,197,94,0.3); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes mist {
+  0% { transform: translateX(-5%) scale(1.05); opacity: 0.08; }
+  50% { transform: translateX(5%) scale(1.1); opacity: 0.15; }
+  100% { transform: translateX(-5%) scale(1.05); opacity: 0.08; }
+}
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.97); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes border-run {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes spark {
+  0% { transform: scale(0) rotate(0deg); opacity: 1; }
+  100% { transform: scale(1) rotate(180deg); opacity: 0; }
+}
+
+@keyframes rune-glow {
+  0%, 100% { opacity: 0.2; text-shadow: none; }
+  50% { opacity: 0.6; text-shadow: 0 0 8px var(--primary-gold); }
+}
+
+@keyframes scroll-open {
+  from { clip-path: inset(0 50% 0 50%); opacity: 0; }
+  to { clip-path: inset(0 0% 0 0%); opacity: 1; }
+}
+
+@keyframes glow-line {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; box-shadow: 0 0 8px var(--primary-gold); }
+}
+
+@keyframes float-particle {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* Animation Utility Classes */
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-float-slow { animation: floatSlow 6s ease-in-out infinite; }
+.animate-pulse-gold { animation: pulse-gold 2.5s ease-in-out infinite; }
+.animate-pulse-green { animation: pulse-green 2.5s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 12s linear infinite; }
+.animate-twinkle { animation: twinkle 2s ease-in-out infinite; }
+.animate-mist { animation: mist 8s ease-in-out infinite; }
+.animate-orb-drift { animation: orb-drift 12s ease-in-out infinite; }
+.animate-rune-glow { animation: rune-glow 3s ease-in-out infinite; }
+.animate-glow-line { animation: glow-line 2s ease-in-out infinite; }
+
+/* Shimmer Text */
+.shimmer-text {
+  background: linear-gradient(90deg, var(--primary-gold) 0%, #fff8e1 25%, var(--primary-gold) 50%, var(--emerald-glow) 75%, var(--primary-gold) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Timeline */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--primary-gold), transparent);
+  transform: translateX(-50%);
+  animation: glow-line 2.5s ease-in-out infinite;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--primary-gold);
+  border-radius: 50%;
+  border: 2px solid var(--bg-color);
+  box-shadow: 0 0 12px var(--primary-gold);
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* Skill floating card */
+.skill-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(21, 26, 36, 0.8);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  cursor: none;
+}
+
+.skill-chip:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  transform: translateY(-3px) scale(1.03);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+/* Typing cursor */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: var(--primary-gold);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink-cursor 1s step-end infinite;
+}
+
+/* Badge */
+.tech-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 99px;
+  font-size: 0.72rem;
+  color: var(--primary-gold);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+
+.tech-badge:hover {
+  background: rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.tech-badge-green {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: var(--magic-green);
+}
+
+.tech-badge-purple {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: var(--accent-purple);
+}
+
+/* Gradient border animated */
+.magic-border {
+  position: relative;
+}
+
+.magic-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary-gold), var(--emerald-glow), var(--accent-purple), var(--primary-gold));
+  background-size: 300% 300%;
+  animation: border-run 4s ease infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.magic-border:hover::before { opacity: 1; }
+
+/* Section ornament */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.ornament-line {
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, var(--primary-gold));
+}
+
+.ornament-line.right {
+  background: linear-gradient(90deg, var(--primary-gold), transparent);
+}
+
+.ornament-star {
+  color: var(--primary-gold);
+  font-size: 1rem;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* Navbar */
+.nav-link {
+  position: relative;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--muted-text);
+  text-decoration: none;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+  cursor: none;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--primary-gold), var(--magic-green));
+  transition: width 0.35s ease;
+  box-shadow: 0 0 6px var(--primary-gold);
+}
+
+.nav-link:hover { color: var(--primary-gold); }
+.nav-link:hover::after { width: 100%; }
+.nav-link.active { color: var(--primary-gold); }
+.nav-link.active::after { width: 100%; }
+
+/* Responsive helpers */
+@media (max-width: 768px) {
+  .section-container { padding: 3rem 1.25rem; }
+}
