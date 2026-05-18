@@ -115,7 +115,7 @@ export default function Certifications() {
           <p className="section-subtitle">Seals of mastery bestowed upon the worthy</p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
+        <div className="certs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
           {certifications.map((cert, i) => (
             <CertCard key={cert.id} cert={cert} index={i} />
           ))}

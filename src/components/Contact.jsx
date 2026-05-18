@@ -36,7 +36,7 @@ export default function Contact() {
           <p className="section-subtitle">Dispatch a scroll — I shall respond with haste</p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
+        <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
 
           {/* Left — info */}
           <motion.div

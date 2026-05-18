@@ -170,7 +170,7 @@ export default function Projects() {
           <p className="section-subtitle">Artefacts forged through code and conjuration</p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.75rem', alignItems: 'start' }}>
+        <div className="projects-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.75rem', alignItems: 'start' }}>
           {projects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}

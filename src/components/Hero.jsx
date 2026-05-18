@@ -87,7 +87,8 @@ function FloatingCodeWindow() {
           overflow: 'hidden',
           backdropFilter: 'blur(12px)',
           zIndex: 1,
-          minWidth: '340px',
+          minWidth: 'min(340px, 90vw)',
+          width: '100%',
         }}
       >
         {/* Window chrome */}
@@ -309,6 +310,7 @@ export default function Hero() {
 
       {/* ---- Main content row ---- */}
       <motion.div
+      className="hero-row"
         style={{
           position: 'relative', zIndex: 3,
           display: 'flex',
@@ -324,7 +326,7 @@ export default function Hero() {
         }}
       >
         {/* ---- Left: Text content ---- */}
-        <div style={{ flex: '1 1 480px', textAlign: 'center' }}>
+        <div className="hero-text" style={{ flex: '1 1 480px', textAlign: 'center' }}>
           {/* Rune sparkles */}
           {['✦', '⚡', '✧', '◈', '⌬', '✦', '⚡'].map((rune, i) => (
             <motion.span
@@ -369,6 +371,7 @@ export default function Hero() {
 
           {/* Main heading */}
           <motion.h1
+            className="hero-h1"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
@@ -439,6 +442,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1 }}
+            className="hero-buttons"
             style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '2.5rem' }}
           >
             <motion.button
@@ -500,7 +504,7 @@ export default function Hero() {
         </div>
 
         {/* ---- Right: Floating code window ---- */}
-        <div style={{ flex: '0 1 360px', display: 'flex', justifyContent: 'center' }}>
+        <div className="hero-code" style={{ flex: '0 1 360px', display: 'flex', justifyContent: 'center', width: '100%' }}>
           <FloatingCodeWindow />
         </div>
       </motion.div>

@@ -142,7 +142,7 @@ export default function Skills() {
         </motion.div>
 
         {/* Spellbook grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+        <div className="skills-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
           {skillCategories.map((cat, i) => (
             <CategoryCard key={cat.id} cat={cat} delay={i * 0.1} />
           ))}

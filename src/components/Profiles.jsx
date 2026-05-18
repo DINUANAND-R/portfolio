@@ -76,12 +76,13 @@ export default function Profiles() {
 
         {/* ── Cards grid ── */}
         <div
+          className="profiles-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
             gap: '1.75rem',
             marginTop: '1rem',
-            alignItems: 'stretch',  /* all cells same height */
+            alignItems: 'stretch',
           }}
         >
           {profiles.map((profile, i) => (
